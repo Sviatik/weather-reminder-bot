@@ -4,11 +4,9 @@ import json
 
 
 
-#BOT_TOKEN=${BOT_TOCKEN}
-BOT_TOKEN='###'
+ACCUWETHER_TOKEN = os.environ['AWTOKEN']
 LOCATION_KEY='324561'
 CURRENT_CONDITION_URL='http://dataservice.accuweather.com/currentconditions/v1/'
-ACCUWETHER_TOKEN='###'
 
 ##### For testing
 def write_json(data, filename='answer.json'):
@@ -17,7 +15,7 @@ def write_json(data, filename='answer.json'):
 ##### End testing
 
 
-def get_current_weather_all_data (location, weather_token):
+def get_current_weather_all_data (weather_token, location='324561'):
 ##### Real usage 
 	url = 'http://dataservice.accuweather.com/currentconditions/v1/' + location + '?apikey=' + weather_token + "&details=true"
 	data = requests.get(url)
@@ -30,6 +28,7 @@ def get_current_weather_all_data (location, weather_token):
 	# content = json.loads(data)
 ##### End testing	
 	return content
+all_data = get_current_weather_all_data(weather_token=ACCUWETHER_TOKEN)
 
 def get_current_temperature (all_data):
 	temperature = all_data[0]['Temperature']['Metric']['Value']
@@ -52,11 +51,20 @@ def get_icon_id (all_data):
 	icon_id = all_data[0]['WeatherIcon']
 	return icon_id
 
-write_json(get_current_weather_all_data(LOCATION_KEY, ACCUWETHER_TOKEN))
-all_data = get_current_weather_all_data(LOCATION_KEY, ACCUWETHER_TOKEN)
+write_json(get_current_weather_all_data(weather_token=ACCUWETHER_TOKEN))
 
-print("The weather is ", get_weather_text(all_data))
-print("Icon is ", get_icon_id(all_data))
-print("Temperature is ", get_current_temperature(all_data))
-print("Real feel Temperature is ", get_current_feel_real_temperature(all_data))
-print("Wind Speed is ", get_current_wind_speed(all_data))
+weather = "The weather is %s" % (get_weather_text(all_data))
+icon = "Icon is %s" % (get_icon_id(all_data))
+temperature = "Temperature is %s" % (get_current_temperature(all_data))
+real_feel_temperature = "Real feel Temperature is %s" % (get_current_feel_real_temperature(all_data))
+wind_speed = "Wind speed is %s" % (get_current_wind_speed(all_data))
+
+def all_info():
+	all = '''
+		The weather is %s
+		Temperature is %s
+		Real feel Temperature is %s
+		Wind Speed is %s
+	''' % (get_weather_text(all_data), get_current_temperature(all_data), \
+		   get_current_feel_real_temperature(all_data),get_current_wind_speed(all_data))
+	return all
