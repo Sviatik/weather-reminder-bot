@@ -66,6 +66,8 @@ def all_info():
 		Temperature is %s
 		Real feel Temperature is %s
 		Wind Speed is %s
-	''' % (get_weather_text(all_data), get_current_temperature(all_data), \
-		   get_current_feel_real_temperature(all_data),get_current_wind_speed(all_data))
+	''' % (get_weather_text(get_current_weather_all_data(weather_token=ACCUWETHER_TOKEN)),
+		   get_current_temperature(get_current_weather_all_data(weather_token=ACCUWETHER_TOKEN)), \
+		   get_current_feel_real_temperature(get_current_weather_all_data(weather_token=ACCUWETHER_TOKEN)),\
+		   get_current_wind_speed(get_current_weather_all_data(weather_token=ACCUWETHER_TOKEN)))
 	return all

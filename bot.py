@@ -35,7 +35,6 @@ def send_message(chat_id, text="Default text"):
 	r = requests.get(url)
 
 
-
 def main():
 	old_update_id = ''
 	print('Bot Started')
