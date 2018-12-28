@@ -29,7 +29,8 @@ def get_current_weather_all_data (weather_token, location='324561'):
 	# content = json.loads(data)
 ##### End testing	
 	return content
-all_data = get_current_weather_all_data(weather_token=ACCUWETHER_TOKEN)
+
+# all_data = get_current_weather_all_data(weather_token=ACCUWETHER_TOKEN)
 
 def get_current_temperature (all_data):
 	temperature = all_data[0]['Temperature']['Metric']['Value']
@@ -54,11 +55,11 @@ def get_icon_id (all_data):
 
 write_json(get_current_weather_all_data(weather_token=ACCUWETHER_TOKEN))
 
-weather = "The weather is %s" % (get_weather_text(all_data))
-icon = "Icon is %s" % (get_icon_id(all_data))
-temperature = "Temperature is %s" % (get_current_temperature(all_data))
-real_feel_temperature = "Real feel Temperature is %s" % (get_current_feel_real_temperature(all_data))
-wind_speed = "Wind speed is %s" % (get_current_wind_speed(all_data))
+# weather = "The weather is %s" % (get_weather_text(all_data))
+# icon = "Icon is %s" % (get_icon_id(all_data))
+# temperature = "Temperature is %s" % (get_current_temperature(all_data))
+# real_feel_temperature = "Real feel Temperature is %s" % (get_current_feel_real_temperature(all_data))
+# wind_speed = "Wind speed is %s" % (get_current_wind_speed(all_data))
 
 def all_info():
 	all = '''
